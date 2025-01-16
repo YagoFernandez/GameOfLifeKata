@@ -4,7 +4,7 @@ public class Cell {
 
 	private CellStatus status;
 
-	private Cell(CellStatus status) {
+	public Cell(CellStatus status) {
 		this.status = status;
 	}
 

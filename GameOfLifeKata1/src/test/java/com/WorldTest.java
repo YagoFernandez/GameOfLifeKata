@@ -1,5 +1,7 @@
 package com;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 /**
@@ -26,5 +28,25 @@ public class WorldTest {
 		CellStatus[][] initialStatus = {
 				{CellStatus.DEAD, CellStatus.DEAD},
 				{CellStatus.DEAD, CellStatus.ALIVE}};
+
+		World world = World.createFrom(initialStatus);
+
+		Cell[][] expectedWorld = {
+				{Cell.createDead(), Cell.createDead()},
+				{Cell.createDead(), Cell.createAlive()}};
+
+//		assertEquals(world.cellMatrix, expectedWorld);
+	}
+
+	@Test
+	public void gets_alive_neighbors_for_a_given_coordinates() {
+		assertEquals(0, World.createFrom(new CellStatus[][] {{CellStatus.DEAD}}).aliveNeighbors(0, 0));
+		assertEquals(1, World.createFrom(new CellStatus[][] {{CellStatus.ALIVE, CellStatus.DEAD}}).aliveNeighbors(0, 1));
+		assertEquals(0, World.createFrom(new CellStatus[][] {{CellStatus.DEAD, CellStatus.DEAD}}).aliveNeighbors(0, 1));
+		assertEquals(2, World.createFrom(new CellStatus[][] {{CellStatus.ALIVE, CellStatus.DEAD, CellStatus.ALIVE}}).aliveNeighbors(0, 1));
+
+		assertEquals(5, World.createFrom(new CellStatus[][] {
+			{CellStatus.ALIVE, CellStatus.DEAD, CellStatus.ALIVE},
+			{CellStatus.ALIVE, CellStatus.ALIVE, CellStatus.ALIVE}}).aliveNeighbors(0, 1));
 	}
 }
