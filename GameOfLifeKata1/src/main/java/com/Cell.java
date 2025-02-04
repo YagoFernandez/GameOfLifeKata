@@ -2,7 +2,7 @@ package com;
 
 public class Cell {
 
-	private CellStatus status;
+	public CellStatus status;
 
 	public Cell(CellStatus status) {
 		this.status = status;
@@ -49,4 +49,8 @@ public class Cell {
 		return 3 == numberOfNeightbors;
 	}
 
+	@Override
+	public String toString() {
+		return status.toString();
+	}
 }

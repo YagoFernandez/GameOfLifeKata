@@ -22,7 +22,38 @@ public class World {
 	}
 
 	public int aliveNeighbors(int row, int column) {
-		return aliveNeightborsInNextRow(row, column) + aliveColumnNeightbors(row, column);
+		return aliveNeightborsInNextRow(row, column)+ aliveNeightborsInPreviousRow(row, column) + aliveColumnNeightbors(row, column);
+	}
+
+	public World nextGeneration() {
+
+
+		Cell[][] nextCellMatrix = new Cell[cellMatrix.length][cellMatrix[0].length];
+
+		for (int rowIndex = 0; rowIndex < cellMatrix.length; rowIndex++) {
+			for (int columnIndex = 0; columnIndex < cellMatrix[0].length; columnIndex++) {
+				Cell cell = cellMatrix[rowIndex][columnIndex].regenerate(this.aliveNeighbors(rowIndex, columnIndex));
+				nextCellMatrix[rowIndex][columnIndex] = cell;
+			}
+		}
+
+		return new World(nextCellMatrix);
+	}
+
+	private int aliveNeightborsInPreviousRow(int row, int column) {
+		int aliveNeightbors = 0;
+
+		int previousRow = row - 1;
+
+		if (previousRow >= 0) {
+
+			if (isAliveCellAt(previousRow, column)) {
+				aliveNeightbors++;
+			}
+
+			aliveNeightbors += this.aliveColumnNeightbors(previousRow, column);
+		}
+		return aliveNeightbors;
 	}
 
 	private int aliveNeightborsInNextRow(int row, int column) {
