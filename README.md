@@ -25,16 +25,3 @@ Este proyecto está desarrollado con:
 - Herramientas de prueba: JUnit
 
 
-## Ejemplo de Uso
-Supongamos que tenemos el siguiente estado inicial:
-```
-.█.
-..█
-██.
-```
-Después de un paso, el estado evoluciona a:
-```
-..█
-.█.
-██.
-```
